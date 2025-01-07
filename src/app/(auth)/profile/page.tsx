@@ -1,136 +1,53 @@
 "use client";
-
-import React, { useState } from "react";
-import { Button } from "@/ui/ui/button";
+// app/profile/page.tsx
+import React from "react";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/ui/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/ui/ui/select";
-
-type Staff = {
-  name: string;
-  email: string;
-  phone: string;
-  image: string;
-};
-
-const staffData: Staff[] = [
-  {
-    name: "Lila Hartman",
-    email: "lila.hartman@example.com",
-    phone: "+1 231 356 2345",
-    image: "https://via.placeholder.com/150",
-  },
-  {
-    name: "Ethan Brooks",
-    email: "ethan.brooks@example.com",
-    phone: "+1 231 356 2345",
-    image: "https://via.placeholder.com/150",
-  },
-  {
-    name: "Liam Carter",
-    email: "liam.carter@example.com",
-    phone: "+1 231 356 2345",
-    image: "https://via.placeholder.com/150",
-  },
-  {
-    name: "Olivia Bennett",
-    email: "olivia.bennett@example.com",
-    phone: "+1 231 356 2345",
-    image: "https://via.placeholder.com/150",
-  },
-];
-
-const StaffListing: React.FC = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const openSidebar = () => setIsSidebarOpen(true);
-  const closeSidebar = () => setIsSidebarOpen(false);
-
-  // Filtered staff list based on the search query
-  const filteredStaff = staffData.filter(
-    (staff) =>
-      staff.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      staff.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      staff.phone.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
+import { Card } from "@/ui/ui/card";
+import { useRouter } from "next/navigation";
+const ProfilePage: React.FC = () => {
+  const router = useRouter();
   return (
-    <div className="p-6 bg-gray-50 min-h-screen relative">
-      {/* Header Section */}
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-blue-700">Staff Listing</h1>
-        <Button
-          className="bg-blue-600 text-white hover:bg-blue-700"
-          onClick={openSidebar}
-        >
-          Add Staff
-        </Button>
-      </div>
-
-      {/* Search Bar */}
-      <div className="flex items-center gap-4 mb-6">
-        <Input
-          type="text"
-          placeholder="Search by name, email, or phone"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-80 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-        />
-        <Button className="bg-blue-600 text-white hover:bg-blue-700">🔍</Button>
-      </div>
-
-      {/* Staff Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {filteredStaff.length > 0 ? (
-          filteredStaff.map((staff, index) => (
-            <div
-              key={index}
-              className="bg-white border border-gray-200 rounded-lg shadow-lg p-4 flex flex-col items-center"
-            >
-              <img
-                src={staff.image}
-                alt={staff.name}
-                className="w-20 h-20 rounded-full mb-4"
-              />
-              <h2 className="text-lg font-semibold text-gray-800 mb-2">
-                {staff.name}
-              </h2>
-              <div className="bg-blue-50 p-2 rounded-md w-full text-center">
-                <p className="text-sm text-gray-600 flex items-center justify-center gap-2">
-                  📧 {staff.email}
-                </p>
-                <p className="text-sm text-gray-600 flex items-center justify-center gap-2">
-                  📞 {staff.phone}
-                </p>
-              </div>
-              <Button className="mt-4 bg-blue-600 text-white w-full hover:bg-blue-700">
-                View details
-              </Button>
-            </div>
-          ))
-        ) : (
-          <p className="col-span-full text-center text-gray-500">
-            No staff members found.
-          </p>
-        )}
-      </div>
-
-      {/* Full-page Sidebar */}
-      {isSidebarOpen && (
-        <div className="fixed inset-0 bg-white z-50 flex flex-col p-6 overflow-y-auto">
-          <div className="flex justify-between items-center mb-6">
-            <h3 className="text-xl font-semibold">Personal Information</h3>
-            <Button variant="outline" onClick={closeSidebar}>
-              Close
-            </Button>
+    <div className="min-h-screen bg-gray-50 p-10">
+      <Card className="max-w-6xl mx-auto shadow-lg rounded-lg p-12">
+        {/* Profile Header */}
+        <div className="flex items-center gap-6 mb-10">
+          <img
+            src="/placeholder-avatar.png"
+            alt="Profile Avatar"
+            className="w-20 h-20 rounded-full object-cover"
+          />
+          <div>
+            <h2 className="text-2xl font-semibold">Olivia Bennett</h2>
+            <p className="text-sm text-gray-600">Team: 003509-ce</p>
           </div>
-          <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        </div>
+
+        {/* Navigation Tabs */}
+        <div className="flex gap-8 border-b mb-10 text-lg">
+          <Button variant="link" className="py-3 px-6 text-blue-600 font-semibold border-b-4 border-blue-600">
+            Profile
+          </Button>
+          <Button variant="link" className="py-3 px-6 text-gray-600 hover:text-blue-600">
+            Skill Management
+          </Button>
+          <Button
+                  variant="link"
+                  className="py-3 px-6 text-gray-600 hover:text-blue-600"
+                  onClick={() => router.push("/payroll")}
+                >
+                  Payrolls
+                </Button>
+          <Button variant="link" className="py-3 px-6 text-gray-600 hover:text-blue-600">
+            Documents
+          </Button>
+        </div>
+
+        {/* Personal Information Form */}
+        <div>
+          <h3 className="text-xl font-semibold mb-6">Personal Information</h3>
+          <form className="grid grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium mb-2">First Name</label>
               <Input type="text" placeholder="First Name" />
@@ -138,14 +55,6 @@ const StaffListing: React.FC = () => {
             <div>
               <label className="block text-sm font-medium mb-2">Last Name</label>
               <Input type="text" placeholder="Last Name" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">Email</label>
-              <Input type="email" placeholder="Email" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">Phone number</label>
-              <Input type="text" placeholder="Phone Number" />
             </div>
             <div>
               <label className="block text-sm font-medium mb-2">Employee ID</label>
@@ -181,24 +90,20 @@ const StaffListing: React.FC = () => {
               <Input type="text" placeholder="Enter your designation" />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Languages Preferences
-              </label>
+              <label className="block text-sm font-medium mb-2">Languages Preferences</label>
               <Input type="text" placeholder="Select your preferred languages" />
             </div>
           </form>
-          <div className="flex justify-end gap-4 mt-6">
-            <Button variant="outline" onClick={closeSidebar}>
-              Cancel
-            </Button>
-            <Button className="bg-blue-600 text-white hover:bg-blue-700">
-              Save
-            </Button>
+
+          {/* Save and Cancel Buttons */}
+          <div className="flex justify-end gap-6 mt-10">
+            <Button variant="outline">Cancel</Button>
+            <Button>Save</Button>
           </div>
         </div>
-      )}
+      </Card>
     </div>
   );
 };
 
-export default StaffListing;
+export default ProfilePage;
