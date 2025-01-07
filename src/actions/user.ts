@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 
 type SignInResponse = {
   error?: string;
-  [key: string]: any; // To allow other potential properties
+  [key: string]: unknown; // To allow other potential properties
 };
 
 export const loginSignup = async (formData: FormData, isLogin: boolean) => {

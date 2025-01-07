@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Label } from "@radix-ui/react-label";
 import FormInput from "@/app/components/Forminput";
 import { Button } from "@/ui/ui/button";
 import { useState } from "react";
@@ -25,7 +24,10 @@ const Login = () => {
       }
     } catch (error) {
       console.error("Login error:", error);
-      toast({ title: "Something went wrong. Please try again.", variant: "destructive" });
+      toast({
+        title: "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
     } finally {
       setLoading(false);
     }
@@ -70,11 +72,12 @@ const Login = () => {
               {loading ? "Loading..." : "Login"}
             </Button>
           </form>
+          {`Don't have an account?`}{" "}
           <Link
             href="/signup"
             className="text-center text-blue-800 cursor-pointer underline"
           >
-            Don't have an account? Sign up
+            Signup
           </Link>
         </div>
       </div>

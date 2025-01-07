@@ -1,8 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { verifyToken } from "./jwt";
 
-export const withAuth = (handler: any) => {
-  return async (req: NextApiRequest, res: NextApiResponse) => {
+interface AuthenticatedRequest extends NextApiRequest {
+  user?: unknown; // Attach user info to the request
+}
+
+export const withAuth = (handler: (req: AuthenticatedRequest, res: NextApiResponse) => Promise<void> | void) => {
+  return async (req: AuthenticatedRequest, res: NextApiResponse) => {
     const token = req.headers.authorization?.split(" ")[1];
 
     if (!token) {
@@ -11,13 +15,11 @@ export const withAuth = (handler: any) => {
 
     const decoded = verifyToken(token);
 
-    
     if (!decoded) {
       return res.status(401).json({ error: "Invalid or expired token" });
     }
 
-    (req as any).user = decoded; // Attach user info to request
+    req.user = decoded; // Attach user info to the request
     return handler(req, res);
   };
 };
-

@@ -1,7 +1,6 @@
 "use client";
 import { startTransition, useState } from "react";
 import Link from "next/link";
-import { Label } from "@radix-ui/react-label";
 import FormInput from "@/app/components/Forminput";
 import { Button } from "@/ui/ui/button";
 import { loginSignup } from "@/actions/user";
