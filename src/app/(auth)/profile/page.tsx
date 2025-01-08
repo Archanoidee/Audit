@@ -57,10 +57,32 @@ const ProfilePage: React.FC = () => {
               <Input type="text" placeholder="Last Name" />
             </div>
             <div>
+              <label className="block text-sm font-medium mb-2">Contact Number</label>
+              <Input type="text" placeholder="Contact Number" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-2">Gmail id</label>
+              <Input type="text" placeholder="Gmail id" />
+            </div>
+            <div>
               <label className="block text-sm font-medium mb-2">Employee ID</label>
               <Input type="text" placeholder="Enter your employee id" />
             </div>
             <div>
+              <label className="block text-sm font-medium mb-2">maritalStatus</label>
+              <Input type="text" placeholder="maritalStatus" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-2">role</label>
+              <Input type="text" placeholder="role" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-2">department</label>
+              <Input type="text" placeholder="role" />
+            </div>
+            
+            <div>
+            
               <label className="block text-sm font-medium mb-2">Date of Birth</label>
               <Input type="text" placeholder="DD/MM/YYYY" />
             </div>

@@ -7,6 +7,7 @@ import { CardFooter } from "@/ui/ui/card";
 import { CardHeader } from "@/ui/ui/card";
 import { CardDescription } from "@/ui/ui/card";
 import { CardTitle } from "@/ui/ui/card";
+import { useRouter } from "next/navigation";
 
 const Dashboard = () => {
   const UserIcon = Icons.User as React.ComponentType<Icons.LucideProps>;
@@ -14,9 +15,20 @@ const Dashboard = () => {
   const BriefcaseIcon = Icons.Briefcase as React.ComponentType<Icons.LucideProps>;
   const NetworkIcon = Icons.Network as React.ComponentType<Icons.LucideProps>;
   const MailIcon = Icons.Mail as React.ComponentType<Icons.LucideProps>;
+  const router = useRouter();
 
   return (
+    <div>
+<Button
+                  
+                  className="py-3 px-6 text-blue-600 hover:text-blue-600"
+                  onClick={() => router.push("/login")}
+                >
+                  Logout
+                </Button>
+
     <div className="flex flex-wrap justify-center gap-6 p-6">
+     
       {/* Card for Staff */}
       <Card className="w-64 border rounded-lg shadow-md">
         <CardHeader>
@@ -96,6 +108,7 @@ const Dashboard = () => {
           <Button onClick={() => (window.location.href = "/contact")}>Show</Button>
         </CardFooter>
       </Card>
+    </div>
     </div>
   );
 };
